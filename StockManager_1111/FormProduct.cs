@@ -27,7 +27,7 @@ namespace StockManager_1111
             LoadCategoryComboBox();  // DB
             LoadDefaultComboBoxes(); // 고정값으로 채우기
 
-            if (GlobalContext.CurrentUser.Role != "Admin") // 어드민전용
+            if (GlobalContext.CurrentUser.Role != "Admin") // 어드민아니라면...
             {
                 //btnNew.Enabled = false;  
                 //btnSave.Enabled = false;   
@@ -68,6 +68,14 @@ namespace StockManager_1111
             dgvProducts.Columns["Unit"].Width = 80;
             dgvProducts.Columns["SafetyStock"].Width = 80;
             dgvProducts.Columns["StorageType"].Width = 80;
+
+            // 판매가만 모아서...
+            dgvProducts.Columns["SellingPrice"].HeaderText = "판매가";
+            dgvProducts.Columns["SellingPrice"].DefaultCellStyle.Format = "N0"; // 천단위
+            dgvProducts.Columns["SellingPrice"].DefaultCellStyle.Alignment = DataGridViewContentAlignment.MiddleRight;
+            dgvProducts.Columns["SellingPrice"].Width = 70;
+
+
         }
         private void LoadCategoryComboBox()
         {
@@ -121,6 +129,7 @@ namespace StockManager_1111
                 newProduct.StorageType = cbxStorageType.SelectedItem.ToString();
                 newProduct.Unit = cbxUnit.SelectedItem.ToString();
                 newProduct.SafetyStock = (int)numSafety.Value; // NumericUpDown의 값은 decimal이라 int로 변환
+                newProduct.SellingPrice = (int)numSellingPrice.Value;
 
                 // Repository에 전달
                 ProductRepository productRepo = new ProductRepository();
@@ -159,6 +168,7 @@ namespace StockManager_1111
             cbxStorageType.SelectedItem = row.Cells["StorageType"].Value.ToString();
             cbxUnit.SelectedItem = row.Cells["Unit"].Value.ToString();
             numSafety.Value = Convert.ToDecimal(row.Cells["SafetyStock"].Value);
+            numSellingPrice.Value = Convert.ToDecimal(row.Cells["SellingPrice"].Value);
         }
 
         private void btnUpdate_Click(object sender, EventArgs e)
@@ -177,6 +187,7 @@ namespace StockManager_1111
             productToUpdate.StorageType = cbxStorageType.SelectedItem.ToString();
             productToUpdate.Unit = cbxUnit.SelectedItem.ToString();
             productToUpdate.SafetyStock = (int)numSafety.Value;
+            productToUpdate.SellingPrice = (int)numSellingPrice.Value;
 
             try
             {

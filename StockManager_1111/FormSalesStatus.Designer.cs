@@ -130,7 +130,7 @@
             // btnRefresh
             // 
             this.btnRefresh.BackColor = System.Drawing.Color.GhostWhite;
-            this.btnRefresh.Font = new System.Drawing.Font("Malgun Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.btnRefresh.Font = new System.Drawing.Font("Pretendard Variable", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.btnRefresh.Location = new System.Drawing.Point(363, 93);
             this.btnRefresh.Name = "btnRefresh";
             this.btnRefresh.Size = new System.Drawing.Size(87, 35);
@@ -142,7 +142,7 @@
             // btnSearch
             // 
             this.btnSearch.BackColor = System.Drawing.Color.GhostWhite;
-            this.btnSearch.Font = new System.Drawing.Font("Malgun Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.btnSearch.Font = new System.Drawing.Font("Pretendard Variable", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.btnSearch.Location = new System.Drawing.Point(363, 38);
             this.btnSearch.Name = "btnSearch";
             this.btnSearch.Size = new System.Drawing.Size(87, 35);

@@ -89,7 +89,11 @@ namespace StockManager_1111
 
         private void btnRefresh_Click(object sender, EventArgs e)
         {
+            dtpStart.Value = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
+            dtpEnd.Value = DateTime.Now;
 
+            tbSearchBox.Text = "";
+            dgvSales.DataSource = null;
         }
 
         // 상단 요약 라벨
