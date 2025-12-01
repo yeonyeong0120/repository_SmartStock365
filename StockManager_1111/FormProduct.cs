@@ -119,6 +119,13 @@ namespace StockManager_1111
                 MessageBox.Show("카테고리를 선택해주세요!", "입력 오류", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
             }
+            // 상품명 중복 검사
+            ProductRepository productRepo = new ProductRepository();
+            if (productRepo.IsDuplicateProductName(tbProductName.Text))
+            {
+                MessageBox.Show("이미 존재하는 상품명입니다!", "중복 오류", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
             try
             {
@@ -130,9 +137,6 @@ namespace StockManager_1111
                 newProduct.Unit = cbxUnit.SelectedItem.ToString();
                 newProduct.SafetyStock = (int)numSafety.Value; // NumericUpDown의 값은 decimal이라 int로 변환
                 newProduct.SellingPrice = (int)numSellingPrice.Value;
-
-                // Repository에 전달
-                ProductRepository productRepo = new ProductRepository();
 
                 // DAL에 요청하는 함수 호출
                 bool success = productRepo.AddNewProduct(newProduct);

@@ -126,6 +126,24 @@ namespace StockManagerDAL
             }
         }
 
+        // 품명 중복 검사 // 공백 상관없
+        public bool IsDuplicateProductName(string productName)
+        {
+            using (SqlConnection conn = new SqlConnection(connstr))
+            {
+                conn.Open();
+                string sql = "SELECT COUNT(*) FROM Products WHERE REPLACE(ProductName, ' ', '') = @Name";
+                SqlCommand cmd = new SqlCommand(sql, conn);
+
+                cmd.Parameters.AddWithValue("@Name", productName.Replace(" ", ""));
+
+                int count = (int)cmd.ExecuteScalar();
+                return count > 0; // 0보다 크면 이미 있다는 뜻
+            }
+        }
+
+
+
         // 기능 추가 예쩡
-    }
+    } // 클래스
 }

@@ -257,24 +257,26 @@ namespace StockManagerDAL
         // 파이차트용 // 매출만
         public Dictionary<string, long> GetSalesShare(DateTime start, DateTime end, string keyword)
         {
-            var result = new Dictionary<string, long>();
+            // 1. 일단 DB에서 해당 기간의 모든 판매 데이터를 가져옵니다.
+            var allData = new Dictionary<string, long>();
+
             using (SqlConnection conn = new SqlConnection(connstr))
             {
                 conn.Open();
                 string sql = @"
-            SELECT 
-                p.ProductName,
-                SUM(t.Quantity * p.SellingPrice) as TotalSales
-            FROM Transactions t
-            JOIN StockLots s ON t.LotId = s.LotId
-            JOIN Products p ON s.ProductId = p.ProductId
-            WHERE t.TransactionType = 'OUT' 
-              AND (t.TransactionDate BETWEEN @Start AND @End)
-              AND (p.ProductName LIKE '%' + @Keyword + '%')
-            GROUP BY p.ProductName
-            ORDER BY TotalSales DESC"; // 매출 높은 순
-        
-        SqlCommand cmd = new SqlCommand(sql, conn);
+                    SELECT 
+                        p.ProductName,
+                        SUM(t.Quantity * p.SellingPrice) as TotalSales
+                    FROM Transactions t
+                    JOIN StockLots s ON t.LotId = s.LotId
+                    JOIN Products p ON s.ProductId = p.ProductId
+                    WHERE t.TransactionType = 'OUT' 
+                          AND (t.TransactionDate BETWEEN @Start AND @End)
+                          AND (p.ProductName LIKE '%' + @Keyword + '%')
+                    GROUP BY p.ProductName
+                    ORDER BY TotalSales DESC";
+
+                SqlCommand cmd = new SqlCommand(sql, conn);
                 cmd.Parameters.AddWithValue("@Start", start.Date);
                 cmd.Parameters.AddWithValue("@End", end.Date.AddDays(1).AddSeconds(-1));
                 cmd.Parameters.AddWithValue("@Keyword", keyword);
@@ -283,12 +285,39 @@ namespace StockManagerDAL
                 {
                     while (reader.Read())
                     {
-                        string name = reader["ProductName"].ToString();
-                        long sales = Convert.ToInt64(reader["TotalSales"]);
-                        result.Add(name, sales);
+                        allData.Add(reader["ProductName"].ToString(), Convert.ToInt64(reader["TotalSales"]));
                     }
                 }
             }
+
+            // 2. [추가된 로직] 상위 5개 + 기타 처리
+            if (allData.Count <= 5)
+            {
+                return allData; // 5개 이하면 그냥 다 리턴
+            }
+
+            var result = new Dictionary<string, long>();
+            int count = 0;
+            long otherTotal = 0;
+
+            foreach (var item in allData)
+            {
+                if (count < 5)
+                {
+                    result.Add(item.Key, item.Value); // 상위 5개는 그대로 추가
+                    count++;
+                }
+                else
+                {
+                    otherTotal += item.Value; // 나머지는 합산
+                }
+            }
+
+            if (otherTotal > 0)
+            {
+                result.Add("기타", otherTotal); // '기타' 항목 추가
+            }
+
             return result;
         }
 

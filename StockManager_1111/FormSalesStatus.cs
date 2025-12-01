@@ -23,6 +23,10 @@ namespace StockManager_1111
         {
             UpdateSummaryLabels(); // 라벨 업데이트
             UpdateTrendChart();  // 꺾은선
+
+            dtpStart.Value = DateTime.Today;
+            dtpEnd.Value = DateTime.Today;
+            btnSearch_Click(sender, e); // 조회 버튼을 강제로 한 번 클릭
         }
 
         private void btnSearch_Click(object sender, EventArgs e)
@@ -79,8 +83,8 @@ namespace StockManager_1111
                 // 툴팁
                 series.Points[index].ToolTip = $"{item.Key}: {item.Value:N0}원";
 
-                // 라벨  // #PERCENT: 백분율, #VALX: 상품명
-                series.Points[index].Label = "#VALX (#PERCENT)";
+                // 라벨  // 퍼센트만!!
+                series.Points[index].Label = "#PERCENT";
                 series.Points[index].LegendText = "#VALX";
             }
 
