@@ -152,6 +152,7 @@
             this.numPrice.Name = "numPrice";
             this.numPrice.Size = new System.Drawing.Size(139, 25);
             this.numPrice.TabIndex = 8;
+            this.numPrice.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // numQuantity
             // 
@@ -165,6 +166,7 @@
             this.numQuantity.Name = "numQuantity";
             this.numQuantity.Size = new System.Drawing.Size(139, 25);
             this.numQuantity.TabIndex = 7;
+            this.numQuantity.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
             // 
             // cbxProduct
             // 

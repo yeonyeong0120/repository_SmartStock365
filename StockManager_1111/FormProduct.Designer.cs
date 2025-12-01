@@ -30,6 +30,8 @@
         {
             this.dgvProducts = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.numSellingPrice = new System.Windows.Forms.NumericUpDown();
+            this.label8 = new System.Windows.Forms.Label();
             this.cbxUnit = new System.Windows.Forms.ComboBox();
             this.cbxStorageType = new System.Windows.Forms.ComboBox();
             this.numSafety = new System.Windows.Forms.NumericUpDown();
@@ -48,12 +50,10 @@
             this.lblSelected____ = new System.Windows.Forms.Label();
             this.btnUpdate = new System.Windows.Forms.Button();
             this.label7 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
-            this.numSellingPrice = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.dgvProducts)).BeginInit();
             this.groupBox1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numSafety)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.numSellingPrice)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numSafety)).BeginInit();
             this.SuspendLayout();
             // 
             // dgvProducts
@@ -64,11 +64,11 @@
             this.dgvProducts.AllowUserToResizeRows = false;
             this.dgvProducts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvProducts.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.dgvProducts.Location = new System.Drawing.Point(0, 378);
+            this.dgvProducts.Location = new System.Drawing.Point(0, 369);
             this.dgvProducts.Name = "dgvProducts";
             this.dgvProducts.ReadOnly = true;
             this.dgvProducts.RowTemplate.Height = 23;
-            this.dgvProducts.Size = new System.Drawing.Size(646, 217);
+            this.dgvProducts.Size = new System.Drawing.Size(646, 269);
             this.dgvProducts.TabIndex = 0;
             this.dgvProducts.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgvProducts_CellClick);
             // 
@@ -93,6 +93,36 @@
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "상품 등록 정보";
+            // 
+            // numSellingPrice
+            // 
+            this.numSellingPrice.Font = new System.Drawing.Font("Malgun Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.numSellingPrice.Location = new System.Drawing.Point(145, 268);
+            this.numSellingPrice.Maximum = new decimal(new int[] {
+            1316134911,
+            2328,
+            0,
+            0});
+            this.numSellingPrice.Name = "numSellingPrice";
+            this.numSellingPrice.Size = new System.Drawing.Size(203, 25);
+            this.numSellingPrice.TabIndex = 13;
+            this.numSellingPrice.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
+            this.numSellingPrice.ThousandsSeparator = true;
+            this.numSellingPrice.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Malgun Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.label8.Location = new System.Drawing.Point(28, 271);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(80, 20);
+            this.label8.TabIndex = 12;
+            this.label8.Text = "💰 판매가";
             // 
             // cbxUnit
             // 
@@ -281,42 +311,12 @@
             this.label7.TabIndex = 16;
             this.label7.Text = "※ 상품 정보를 등록하면 입고를 진행할 수 있습니다!";
             // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Font = new System.Drawing.Font("Malgun Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.label8.Location = new System.Drawing.Point(28, 271);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(80, 20);
-            this.label8.TabIndex = 12;
-            this.label8.Text = "💰 판매가";
-            // 
-            // numSellingPrice
-            // 
-            this.numSellingPrice.Font = new System.Drawing.Font("Malgun Gothic", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.numSellingPrice.Location = new System.Drawing.Point(145, 268);
-            this.numSellingPrice.Maximum = new decimal(new int[] {
-            1316134911,
-            2328,
-            0,
-            0});
-            this.numSellingPrice.Name = "numSellingPrice";
-            this.numSellingPrice.Size = new System.Drawing.Size(203, 25);
-            this.numSellingPrice.TabIndex = 13;
-            this.numSellingPrice.TextAlign = System.Windows.Forms.HorizontalAlignment.Right;
-            this.numSellingPrice.ThousandsSeparator = true;
-            this.numSellingPrice.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
-            // 
             // FormProduct
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(646, 595);
+            this.ClientSize = new System.Drawing.Size(646, 638);
             this.Controls.Add(this.label7);
             this.Controls.Add(this.btnUpdate);
             this.Controls.Add(this.tbSelectedProductId);
@@ -335,8 +335,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvProducts)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numSafety)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.numSellingPrice)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.numSafety)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

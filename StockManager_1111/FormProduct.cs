@@ -279,6 +279,7 @@ namespace StockManager_1111
             }
 
             numSafety.Value = 0;
+            numSellingPrice.Value = 0;
             tbProductName.Focus();
         }
     }

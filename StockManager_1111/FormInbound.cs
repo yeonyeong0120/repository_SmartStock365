@@ -49,6 +49,7 @@ namespace StockManager_1111
             dgvStockLots.Columns["PurchasePrice"].HeaderText = "매입 단가";
             dgvStockLots.Columns["ExpirationDate"].HeaderText = "유통기한";
             dgvStockLots.Columns["SupplierName"].HeaderText = "매입처";
+            dgvStockLots.Columns["CategoryName"].HeaderText = "분류";
 
             dgvStockLots.Columns["LotId"].DisplayIndex = 0;
             dgvStockLots.Columns["ProductName"].DisplayIndex = 1;
@@ -58,8 +59,12 @@ namespace StockManager_1111
             dgvStockLots.Columns["SupplierName"].DisplayIndex = 5;
 
             dgvStockLots.Columns["PurchasePrice"].DefaultCellStyle.Format = "N0";
-            dgvStockLots.Columns["ProductName"].Width = 198;
-            dgvStockLots.Columns["ExpirationDate"].Width = 110;
+            dgvStockLots.Columns["LotId"].Width = 90;
+            dgvStockLots.Columns["ProductName"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+            dgvStockLots.Columns["ExpirationDate"].Width = 100;
+            dgvStockLots.Columns["Quantity"].Width = 90;
+            dgvStockLots.Columns["PurchasePrice"].Width = 90;
+            dgvStockLots.Columns["CategoryName"].Width = 82;
         }
 
         private void btnInbound_Click(object sender, EventArgs e)
