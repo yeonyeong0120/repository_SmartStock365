@@ -166,6 +166,62 @@ namespace StockManager_1111
             ApplyFilter();
         }
 
+        // 폐기 버튼
+        private void btnDispose_Click(object sender, EventArgs e)
+        {
+            if (dgvStockStatus.CurrentRow == null)
+            {
+                MessageBox.Show("선택된 재고가 없습니다.", "선택 필요", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            DataGridViewRow row = dgvStockStatus.CurrentRow;
+
+            int lotId = Convert.ToInt32(row.Cells["LotId"].Value);
+            int productId = Convert.ToInt32(row.Cells["ProductId"].Value);
+            int currentQty = Convert.ToInt32(row.Cells["Quantity"].Value);
+            string productName = row.Cells["ProductName"].Value.ToString();
+
+            // 재고 0체크
+            if (currentQty <= 0)
+            {
+                MessageBox.Show("이미 재고가 0인 상품입니다.", "처리 불가", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            // 진짜 폐기할건지?!
+            string msg = $"[상품명: {productName}]\n\n현재 재고 {currentQty}개를 전량 '폐기' 처리하시겠습니까?\n(이 작업은 되돌릴 수 없습니다.)";
+            DialogResult result = MessageBox.Show(msg, "폐기 확인", MessageBoxButtons.YesNo, MessageBoxIcon.Error);
+
+            if (result == DialogResult.Yes)
+            {
+                try
+                {
+                    TransactionRepository transRepo = new TransactionRepository();
+                    int userId = GlobalContext.CurrentUser != null ? GlobalContext.CurrentUser.UserId : 1;
+
+                    bool success = transRepo.DisposeStock(lotId, productId, currentQty, userId, "유통기한 만료");
+
+                    if (success)
+                    {
+                        MessageBox.Show("폐기 처리가 완료되었습니다.", "완료", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        LoadStockStatus(); // 새로고침
+                    }
+                    else
+                    {
+                        MessageBox.Show("폐기 처리에 실패했습니다.", "실패", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("오류 발생: " + ex.Message, "에러", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+
+
+
+
 
     }  // class
 }

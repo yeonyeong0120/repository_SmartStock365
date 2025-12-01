@@ -369,6 +369,49 @@ namespace StockManagerDAL
             return result;
         }
 
+        // 폐기 처리 메서드
+        public bool DisposeStock(int lotId, int productId, int quantity, int userId, string reason)
+        {
+            using (SqlConnection conn = new SqlConnection(connstr))
+            {
+                conn.Open();
+                SqlTransaction trans = conn.BeginTransaction();
+
+                try
+                {                    
+                    string insertSql = @"INSERT INTO Transactions 
+                                (LotId, ProductId, UserId, TransactionType, Quantity, TransactionDate, Reason)
+                                VALUES 
+                                (@LotId, @PId, @UserId, 'DISPOSE', @Qty, GETDATE(), @Reason)";
+
+                    SqlCommand cmdInsert = new SqlCommand(insertSql, conn, trans);
+                    cmdInsert.Parameters.AddWithValue("@LotId", lotId);
+                    cmdInsert.Parameters.AddWithValue("@PId", productId);
+                    cmdInsert.Parameters.AddWithValue("@UserId", userId);
+                    cmdInsert.Parameters.AddWithValue("@Qty", quantity);
+                    cmdInsert.Parameters.AddWithValue("@Reason", reason); // 사유
+
+                    cmdInsert.ExecuteNonQuery();
+
+                    string updateSql = "UPDATE StockLots SET Quantity = Quantity - @Qty WHERE LotId = @LotId";
+
+                    SqlCommand cmdUpdate = new SqlCommand(updateSql, conn, trans);
+                    cmdUpdate.Parameters.AddWithValue("@LotId", lotId);
+                    cmdUpdate.Parameters.AddWithValue("@Qty", quantity);
+
+                    cmdUpdate.ExecuteNonQuery();
+
+                    trans.Commit(); // 성공하면 저장
+                    return true;
+                }
+                catch (Exception)
+                {
+                    trans.Rollback();
+                    throw;
+                }
+            }
+        }
+
 
         // 여기에 나중에 ㄱ기능추가
     }

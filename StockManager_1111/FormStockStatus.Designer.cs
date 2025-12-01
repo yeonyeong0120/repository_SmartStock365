@@ -42,12 +42,14 @@
             this.label2 = new System.Windows.Forms.Label();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.textBox2 = new System.Windows.Forms.TextBox();
+            this.btnDispose = new System.Windows.Forms.Button();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvStockStatus)).BeginInit();
             this.SuspendLayout();
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnDispose);
             this.groupBox1.Controls.Add(this.chkExpired);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.chkImpending);
@@ -142,7 +144,7 @@
             // 
             this.btnRefresh.BackColor = System.Drawing.Color.GhostWhite;
             this.btnRefresh.Font = new System.Drawing.Font("Malgun Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.btnRefresh.Location = new System.Drawing.Point(357, 47);
+            this.btnRefresh.Location = new System.Drawing.Point(357, 41);
             this.btnRefresh.Name = "btnRefresh";
             this.btnRefresh.Size = new System.Drawing.Size(85, 42);
             this.btnRefresh.TabIndex = 3;
@@ -202,6 +204,18 @@
             this.textBox2.Size = new System.Drawing.Size(21, 21);
             this.textBox2.TabIndex = 5;
             // 
+            // btnDispose
+            // 
+            this.btnDispose.BackColor = System.Drawing.Color.MistyRose;
+            this.btnDispose.Font = new System.Drawing.Font("Malgun Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.btnDispose.Location = new System.Drawing.Point(357, 95);
+            this.btnDispose.Name = "btnDispose";
+            this.btnDispose.Size = new System.Drawing.Size(85, 42);
+            this.btnDispose.TabIndex = 11;
+            this.btnDispose.Text = "폐기 처리";
+            this.btnDispose.UseVisualStyleBackColor = false;
+            this.btnDispose.Click += new System.EventHandler(this.btnDispose_Click);
+            // 
             // FormStockStatus
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
@@ -243,5 +257,6 @@
         private System.Windows.Forms.CheckBox chkImpending;
         private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.Button btnDispose;
     }
 }
