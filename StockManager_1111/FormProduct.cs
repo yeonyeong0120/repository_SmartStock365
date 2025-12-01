@@ -28,11 +28,11 @@ namespace StockManager_1111
             LoadDefaultComboBoxes(); // 고정값으로 채우기
 
             if (GlobalContext.CurrentUser.Role != "Admin") // 어드민아니라면...
-            {
+            {                
+                btnDelete.Enabled = false;
                 //btnNew.Enabled = false;  
                 //btnSave.Enabled = false;   
                 //btnUpdate.Enabled = false; 
-                btnDelete.Enabled = false; 
 
                 this.Text += " (조회와 입력 전용)";
             }
