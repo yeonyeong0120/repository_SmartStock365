@@ -87,6 +87,11 @@ namespace StockManager_1111
             FormStockStatus formStockStatus = new FormStockStatus();
             formStockStatus.Show();
         }
+        private void 매출매입현황ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FormSalesStatus formSalesStatus = new FormSalesStatus();
+            formSalesStatus.ShowDialog();
+        }
 
         // 폼로드~
         private void MainForm_Load(object sender, EventArgs e)
@@ -372,6 +377,8 @@ namespace StockManager_1111
             formGuide.ShowDialog();
         }
         //// 여기까지 차트,..
+        ///
+        
 
 
     } // 클래스

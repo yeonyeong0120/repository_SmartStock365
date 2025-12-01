@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataVisualization.Charting.ChartArea chartArea1 = new System.Windows.Forms.DataVisualization.Charting.ChartArea();
             System.Windows.Forms.DataVisualization.Charting.Legend legend1 = new System.Windows.Forms.DataVisualization.Charting.Legend();
             System.Windows.Forms.DataVisualization.Charting.Series series1 = new System.Windows.Forms.DataVisualization.Charting.Series();
@@ -36,6 +37,7 @@
             this.기본정보ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.카테고리관리ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.상품관리ToolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
+            this.매출매입현황ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.거래관리ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.거래처관리ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.거래처규칙관리ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -56,34 +58,35 @@
             this.label4 = new System.Windows.Forms.Label();
             this.rbWeek1 = new System.Windows.Forms.RadioButton();
             this.panel2 = new System.Windows.Forms.Panel();
-            this.chartTopProducts = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.rbMonth6 = new System.Windows.Forms.RadioButton();
             this.rbMonth1 = new System.Windows.Forms.RadioButton();
+            this.panel4rb = new System.Windows.Forms.Panel();
+            this.chartTopProducts = new System.Windows.Forms.DataVisualization.Charting.Chart();
             this.panel3 = new System.Windows.Forms.Panel();
+            this.pictureBox4 = new System.Windows.Forms.PictureBox();
+            this.label7 = new System.Windows.Forms.Label();
             this.dgvLowStock = new System.Windows.Forms.DataGridView();
             this.dgvRecentLogs = new System.Windows.Forms.DataGridView();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.label7 = new System.Windows.Forms.Label();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.pictureBox2 = new System.Windows.Forms.PictureBox();
             this.pictureBox3 = new System.Windows.Forms.PictureBox();
-            this.pictureBox4 = new System.Windows.Forms.PictureBox();
-            this.panel4rb = new System.Windows.Forms.Panel();
             this.pictureBox6 = new System.Windows.Forms.PictureBox();
             this.pbGuide = new StockManager_1111.HoverPictureBox();
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.menuStrip1.SuspendLayout();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDashboard)).BeginInit();
             this.panel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.chartTopProducts)).BeginInit();
             this.panel3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLowStock)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRecentLogs)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbGuide)).BeginInit();
             this.SuspendLayout();
@@ -105,7 +108,8 @@
             // 
             this.기본정보ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.카테고리관리ToolStripMenuItem1,
-            this.상품관리ToolStripMenuItem1});
+            this.상품관리ToolStripMenuItem1,
+            this.매출매입현황ToolStripMenuItem});
             this.기본정보ToolStripMenuItem.Font = new System.Drawing.Font("Malgun Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.기본정보ToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ControlText;
             this.기본정보ToolStripMenuItem.Name = "기본정보ToolStripMenuItem";
@@ -116,7 +120,7 @@
             // 
             this.카테고리관리ToolStripMenuItem1.Font = new System.Drawing.Font("Malgun Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.카테고리관리ToolStripMenuItem1.Name = "카테고리관리ToolStripMenuItem1";
-            this.카테고리관리ToolStripMenuItem1.Size = new System.Drawing.Size(173, 24);
+            this.카테고리관리ToolStripMenuItem1.Size = new System.Drawing.Size(179, 24);
             this.카테고리관리ToolStripMenuItem1.Text = "카테고리 관리";
             this.카테고리관리ToolStripMenuItem1.Click += new System.EventHandler(this.카테고리관리ToolStripMenuItem1_Click);
             // 
@@ -124,9 +128,16 @@
             // 
             this.상품관리ToolStripMenuItem1.Font = new System.Drawing.Font("Malgun Gothic", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.상품관리ToolStripMenuItem1.Name = "상품관리ToolStripMenuItem1";
-            this.상품관리ToolStripMenuItem1.Size = new System.Drawing.Size(173, 24);
+            this.상품관리ToolStripMenuItem1.Size = new System.Drawing.Size(179, 24);
             this.상품관리ToolStripMenuItem1.Text = "상품 관리";
             this.상품관리ToolStripMenuItem1.Click += new System.EventHandler(this.상품관리ToolStripMenuItem1_Click);
+            // 
+            // 매출매입현황ToolStripMenuItem
+            // 
+            this.매출매입현황ToolStripMenuItem.Name = "매출매입현황ToolStripMenuItem";
+            this.매출매입현황ToolStripMenuItem.Size = new System.Drawing.Size(179, 24);
+            this.매출매입현황ToolStripMenuItem.Text = "매출/매입 현황";
+            this.매출매입현황ToolStripMenuItem.Click += new System.EventHandler(this.매출매입현황ToolStripMenuItem_Click);
             // 
             // 거래관리ToolStripMenuItem
             // 
@@ -332,23 +343,6 @@
             this.panel2.Size = new System.Drawing.Size(376, 308);
             this.panel2.TabIndex = 11;
             // 
-            // chartTopProducts
-            // 
-            chartArea1.Name = "ChartArea1";
-            this.chartTopProducts.ChartAreas.Add(chartArea1);
-            this.chartTopProducts.Dock = System.Windows.Forms.DockStyle.Top;
-            legend1.Name = "Legend1";
-            this.chartTopProducts.Legends.Add(legend1);
-            this.chartTopProducts.Location = new System.Drawing.Point(0, 0);
-            this.chartTopProducts.Name = "chartTopProducts";
-            series1.ChartArea = "ChartArea1";
-            series1.Legend = "Legend1";
-            series1.Name = "Series1";
-            this.chartTopProducts.Series.Add(series1);
-            this.chartTopProducts.Size = new System.Drawing.Size(376, 238);
-            this.chartTopProducts.TabIndex = 13;
-            this.chartTopProducts.Text = "chart1";
-            // 
             // rbMonth6
             // 
             this.rbMonth6.AutoSize = true;
@@ -371,6 +365,31 @@
             this.rbMonth1.Text = "한 달";
             this.rbMonth1.UseVisualStyleBackColor = true;
             // 
+            // panel4rb
+            // 
+            this.panel4rb.Location = new System.Drawing.Point(66, 248);
+            this.panel4rb.Name = "panel4rb";
+            this.panel4rb.Size = new System.Drawing.Size(245, 42);
+            this.panel4rb.TabIndex = 14;
+            this.panel4rb.Paint += new System.Windows.Forms.PaintEventHandler(this.panel4rb_Paint);
+            // 
+            // chartTopProducts
+            // 
+            chartArea1.Name = "ChartArea1";
+            this.chartTopProducts.ChartAreas.Add(chartArea1);
+            this.chartTopProducts.Dock = System.Windows.Forms.DockStyle.Top;
+            legend1.Name = "Legend1";
+            this.chartTopProducts.Legends.Add(legend1);
+            this.chartTopProducts.Location = new System.Drawing.Point(0, 0);
+            this.chartTopProducts.Name = "chartTopProducts";
+            series1.ChartArea = "ChartArea1";
+            series1.Legend = "Legend1";
+            series1.Name = "Series1";
+            this.chartTopProducts.Series.Add(series1);
+            this.chartTopProducts.Size = new System.Drawing.Size(376, 238);
+            this.chartTopProducts.TabIndex = 13;
+            this.chartTopProducts.Text = "chart1";
+            // 
             // panel3
             // 
             this.panel3.Controls.Add(this.pictureBox4);
@@ -382,6 +401,27 @@
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(466, 302);
             this.panel3.TabIndex = 14;
+            // 
+            // pictureBox4
+            // 
+            this.pictureBox4.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox4.Image")));
+            this.pictureBox4.Location = new System.Drawing.Point(0, 135);
+            this.pictureBox4.Name = "pictureBox4";
+            this.pictureBox4.Size = new System.Drawing.Size(31, 31);
+            this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.pictureBox4.TabIndex = 20;
+            this.pictureBox4.TabStop = false;
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Font = new System.Drawing.Font("Pretendard Variable", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.label7.ForeColor = System.Drawing.Color.SteelBlue;
+            this.label7.Location = new System.Drawing.Point(28, 138);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(107, 25);
+            this.label7.TabIndex = 17;
+            this.label7.Text = "입출고 기록";
             // 
             // dgvLowStock
             // 
@@ -418,7 +458,7 @@
             this.label5.AutoSize = true;
             this.label5.Font = new System.Drawing.Font("Pretendard Variable", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.label5.ForeColor = System.Drawing.Color.SteelBlue;
-            this.label5.Location = new System.Drawing.Point(89, 391);
+            this.label5.Location = new System.Drawing.Point(89, 389);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(184, 25);
             this.label5.TabIndex = 15;
@@ -434,17 +474,6 @@
             this.label6.Size = new System.Drawing.Size(143, 25);
             this.label6.TabIndex = 16;
             this.label6.Text = "발주가 필요해요";
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Font = new System.Drawing.Font("Pretendard Variable", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.label7.ForeColor = System.Drawing.Color.SteelBlue;
-            this.label7.Location = new System.Drawing.Point(28, 138);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(107, 25);
-            this.label7.TabIndex = 17;
-            this.label7.Text = "입출고 기록";
             // 
             // pictureBox1
             // 
@@ -476,24 +505,6 @@
             this.pictureBox3.TabIndex = 19;
             this.pictureBox3.TabStop = false;
             // 
-            // pictureBox4
-            // 
-            this.pictureBox4.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox4.Image")));
-            this.pictureBox4.Location = new System.Drawing.Point(0, 135);
-            this.pictureBox4.Name = "pictureBox4";
-            this.pictureBox4.Size = new System.Drawing.Size(31, 31);
-            this.pictureBox4.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox4.TabIndex = 20;
-            this.pictureBox4.TabStop = false;
-            // 
-            // panel4rb
-            // 
-            this.panel4rb.Location = new System.Drawing.Point(66, 248);
-            this.panel4rb.Name = "panel4rb";
-            this.panel4rb.Size = new System.Drawing.Size(245, 42);
-            this.panel4rb.TabIndex = 14;
-            this.panel4rb.Paint += new System.Windows.Forms.PaintEventHandler(this.panel4rb_Paint);
-            // 
             // pictureBox6
             // 
             this.pictureBox6.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox6.Image")));
@@ -516,6 +527,11 @@
             this.pbGuide.TabIndex = 22;
             this.pbGuide.TabStop = false;
             this.pbGuide.Click += new System.EventHandler(this.pbGuide_Click);
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
             // 
             // MainForm
             // 
@@ -557,12 +573,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.chartTopProducts)).EndInit();
             this.panel3.ResumeLayout(false);
             this.panel3.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvLowStock)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvRecentLogs)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox3)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox4)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox6)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pbGuide)).EndInit();
             this.ResumeLayout(false);
@@ -612,6 +628,8 @@
         private System.Windows.Forms.Panel panel4rb;
         private System.Windows.Forms.PictureBox pictureBox6;
         private HoverPictureBox pbGuide;
+        private System.Windows.Forms.ToolStripMenuItem 매출매입현황ToolStripMenuItem;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
     }
 }
 

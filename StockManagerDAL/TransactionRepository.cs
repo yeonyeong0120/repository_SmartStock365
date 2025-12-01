@@ -1,11 +1,12 @@
-﻿using System;
+﻿using StockManager.Models;
+using System;
 using System.Collections.Generic;
+using System.Configuration;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using StockManager.Models;
-using System.Configuration;
-using System.Data.SqlClient;
 
 namespace StockManagerDAL
 {
@@ -208,6 +209,166 @@ namespace StockManagerDAL
             }
             return list;
         }
+
+        // 매입매출 현황용...
+        // dgv용 검색 조건에 맞는 입출고 가져오기
+        public DataTable SearchTransactions(DateTime start, DateTime end, string keyword)
+        {
+            using (SqlConnection conn = new SqlConnection(connstr))
+            {
+                conn.Open();
+                string sql = @"
+            SELECT 
+                t.TransactionDate,
+                t.TransactionType,
+                p.ProductName,
+                t.Quantity,
+                CASE 
+                    WHEN t.TransactionType = 'IN' THEN s.PurchasePrice 
+                    WHEN t.TransactionType = 'OUT' THEN p.SellingPrice 
+                    ELSE 0 
+                END AS Price,
+                CASE 
+                    WHEN t.TransactionType = 'IN' THEN s.PurchasePrice * t.Quantity
+                    WHEN t.TransactionType = 'OUT' THEN p.SellingPrice * t.Quantity
+                    ELSE 0 
+                END AS TotalAmount,
+                c.CustomerName
+            FROM Transactions t
+            JOIN StockLots s ON t.LotId = s.LotId
+            JOIN Products p ON s.ProductId = p.ProductId
+            LEFT JOIN Customers c ON s.SupplierId = c.CustomerId
+            WHERE (t.TransactionDate BETWEEN @Start AND @End)
+              AND (p.ProductName LIKE '%' + @Keyword + '%') -- 검색어 필터
+            ORDER BY t.TransactionDate DESC";
+
+                SqlCommand cmd = new SqlCommand(sql, conn);
+                cmd.Parameters.AddWithValue("@Start", start.Date);
+                cmd.Parameters.AddWithValue("@End", end.Date.AddDays(1).AddSeconds(-1));
+                cmd.Parameters.AddWithValue("@Keyword", keyword);
+
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+                DataTable dt = new DataTable();
+                da.Fill(dt);
+                return dt;
+            }
+        }
+
+        // 파이차트용 // 매출만
+        public Dictionary<string, long> GetSalesShare(DateTime start, DateTime end, string keyword)
+        {
+            var result = new Dictionary<string, long>();
+            using (SqlConnection conn = new SqlConnection(connstr))
+            {
+                conn.Open();
+                string sql = @"
+            SELECT 
+                p.ProductName,
+                SUM(t.Quantity * p.SellingPrice) as TotalSales
+            FROM Transactions t
+            JOIN StockLots s ON t.LotId = s.LotId
+            JOIN Products p ON s.ProductId = p.ProductId
+            WHERE t.TransactionType = 'OUT' 
+              AND (t.TransactionDate BETWEEN @Start AND @End)
+              AND (p.ProductName LIKE '%' + @Keyword + '%')
+            GROUP BY p.ProductName
+            ORDER BY TotalSales DESC"; // 매출 높은 순
+        
+        SqlCommand cmd = new SqlCommand(sql, conn);
+                cmd.Parameters.AddWithValue("@Start", start.Date);
+                cmd.Parameters.AddWithValue("@End", end.Date.AddDays(1).AddSeconds(-1));
+                cmd.Parameters.AddWithValue("@Keyword", keyword);
+
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        string name = reader["ProductName"].ToString();
+                        long sales = Convert.ToInt64(reader["TotalSales"]);
+                        result.Add(name, sales);
+                    }
+                }
+            }
+            return result;
+        }
+
+        // 월별 계산 // 0=매출 // 1=매입 / 2=순수익
+        public long[] GetMonthlySummary()
+        {
+            long[] result = new long[3]; // 배열=[매출, 매입, 순수익]
+
+            using (SqlConnection conn = new SqlConnection(connstr))
+            {
+                conn.Open();
+
+                // 이 달 1일 ~ 현재까지
+                DateTime start = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
+                DateTime end = DateTime.Now;
+
+                string sql = @"
+                SELECT 
+                    SUM(CASE WHEN t.TransactionType = 'OUT' THEN t.Quantity * p.SellingPrice ELSE 0 END) as TotalSales,
+                    SUM(CASE WHEN t.TransactionType = 'IN' THEN t.Quantity * s.PurchasePrice ELSE 0 END) as TotalCost
+                FROM Transactions t
+                JOIN StockLots s ON t.LotId = s.LotId
+                JOIN Products p ON s.ProductId = p.ProductId
+                WHERE t.TransactionDate BETWEEN @Start AND @End";
+
+                SqlCommand cmd = new SqlCommand(sql, conn);
+                cmd.Parameters.AddWithValue("@Start", start);
+                cmd.Parameters.AddWithValue("@End", end);
+
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    if (reader.Read())
+                    {
+                        long sales = reader["TotalSales"] == DBNull.Value ? 0 : Convert.ToInt64(reader["TotalSales"]);
+                        long cost = reader["TotalCost"] == DBNull.Value ? 0 : Convert.ToInt64(reader["TotalCost"]);
+
+                        result[0] = sales;       // 매출
+                        result[1] = cost;        // 매입
+                        result[2] = sales - cost; // 순수익
+                    }
+                }
+            }
+            return result;
+        }
+
+        // 꺾은선용.... 최근 6개월 매출만
+        public Dictionary<string, long> GetMonthlyTrend()
+        {
+            var result = new Dictionary<string, long>();
+
+            using (SqlConnection conn = new SqlConnection(connstr))
+            {
+                conn.Open();
+                string sql = @"
+                SELECT 
+                    FORMAT(t.TransactionDate, 'yyyy-MM') as Month,
+                    SUM(t.Quantity * p.SellingPrice) as MonthlySales
+                FROM Transactions t
+                JOIN StockLots s ON t.LotId = s.LotId
+                JOIN Products p ON s.ProductId = p.ProductId
+                WHERE t.TransactionType = 'OUT' 
+                    AND t.TransactionDate >= DATEADD(month, -6, GETDATE())
+                GROUP BY FORMAT(t.TransactionDate, 'yyyy-MM')
+                ORDER BY Month ASC";
+
+                SqlCommand cmd = new SqlCommand(sql, conn);
+
+                using (SqlDataReader reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        string month = reader["Month"].ToString();
+                        long sales = Convert.ToInt64(reader["MonthlySales"]);
+                        result.Add(month, sales);
+                    }
+                }
+            }
+            return result;
+        }
+
 
         // 여기에 나중에 ㄱ기능추가
     }

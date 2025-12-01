@@ -15,8 +15,9 @@ namespace StockManager.Models
         public string StorageType { get; set; }
         public string Unit { get; set; }
         public int SafetyStock { get; set; }
+        public int SellingPrice { get; set; } // 판매가 추가
 
-        // 참고: CategoryId로 실제 CategoryName을 함께 조회해서 담아둘 때 사용
+        // CategoryId로 실제 CategoryName을 함께 조회해서 담아둘 때 사용
         // (JOIN 쿼리를 사용할 때 필요함)
         public string CategoryName { get; set; }
     }
