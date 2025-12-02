@@ -161,5 +161,6 @@ namespace StockManager_1111
 
             FormCustomerRules_Load(sender, e);
         }
+
     }
 }

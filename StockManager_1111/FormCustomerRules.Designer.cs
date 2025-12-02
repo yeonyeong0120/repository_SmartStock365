@@ -109,6 +109,7 @@
             this.cbxCustomer.Name = "cbxCustomer";
             this.cbxCustomer.Size = new System.Drawing.Size(135, 25);
             this.cbxCustomer.TabIndex = 3;
+//            this.cbxCustomer.SelectedIndexChanged += new System.EventHandler(this.cbxCustomer_SelectedIndexChanged);
             // 
             // label3
             // 
