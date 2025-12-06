@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FormGuide));
             this.pbGuide = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.pbGuide)).BeginInit();
             this.SuspendLayout();
@@ -35,9 +36,10 @@
             // pbGuide
             // 
             this.pbGuide.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.pbGuide.Image = ((System.Drawing.Image)(resources.GetObject("pbGuide.Image")));
             this.pbGuide.Location = new System.Drawing.Point(0, 0);
             this.pbGuide.Name = "pbGuide";
-            this.pbGuide.Size = new System.Drawing.Size(800, 450);
+            this.pbGuide.Size = new System.Drawing.Size(989, 609);
             this.pbGuide.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.pbGuide.TabIndex = 0;
             this.pbGuide.TabStop = false;
@@ -48,13 +50,13 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(989, 609);
             this.Controls.Add(this.pbGuide);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
             this.KeyPreview = true;
             this.Name = "FormGuide";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "안내";
+            this.Text = "Smart Stock 사용 가이드";
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.FormGuide_KeyDown);
             ((System.ComponentModel.ISupportInitialize)(this.pbGuide)).EndInit();
             this.ResumeLayout(false);
